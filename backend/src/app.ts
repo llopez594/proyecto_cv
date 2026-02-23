@@ -2,13 +2,38 @@ import express from "express";
 import cors from "cors";
 import routes from "./routes";
 import { sequelize } from "./models/sequelize";
-import "./models"; // esto registra asociaciones
+import "./models";
 
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors());
+const parseCorsOrigins = (value?: string): string[] => {
+    if (!value) return [];
+    return value
+        .split(",")
+        .map((o) => o.trim())
+        .filter(Boolean);
+};
+
+const allowedOrigins = parseCorsOrigins(process.env.CORS_ORIGIN);
+const corsOptions: cors.CorsOptions = {
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true); // Permitir requests sin origin (Postman, curl, health checks) 
+        const isLocalhost = // Permitir localhost en dev  
+            origin.startsWith("http://localhost:") ||
+            origin.startsWith("http://127.0.0.1:");
+        const isAllowed = allowedOrigins.includes(origin); // Permitir dominios configurados
+        if (isLocalhost || isAllowed) return callback(null, true);
+        return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
 app.use(express.json());
 
 // API routes
@@ -26,7 +51,7 @@ sequelize
     .catch((err) => console.error("DB error:", err));
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
 
 export default app;
