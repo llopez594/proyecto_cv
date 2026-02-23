@@ -1,0 +1,37 @@
+
+@baseUrl = http://localhost:3000/api
+
+
+### Health Check
+GET http://localhost:3000/
+Accept: application/json
+
+
+### 
+GET {{baseUrl}}/about
+Accept: application/json
+
+### 
+GET {{baseUrl}}/projects
+Accept: application/json
+
+
+### 
+GET {{baseUrl}}/projects/ecommerce-platform
+Accept: application/json
+
+
+### Enviar mensaje de contacto
+POST {{baseUrl}}/contact
+Content-Type: application/json
+
+{
+    "name": "Luis Lopez",
+    "email": "luis@example.com",
+    "subject": "Consulta de servicios",
+    "message": "Hola, me interesa tu trabajo"
+}
+
+### 
+GET {{baseUrl}}/services
+Accept: application/json

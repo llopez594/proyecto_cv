@@ -1,0 +1,66 @@
+╔══════════════════════════════════════════════════════════════╗
+║        FRONTEND REACT - PORTFOLIO MINIMALISTA                ║
+║        Guía de Instalación y Uso                             ║
+╚══════════════════════════════════════════════════════════════╝
+
+📦 CONTENIDO DEL PAQUETE:
+
+frontend/
+├── src/
+│   ├── components/
+│   │   ├── Navbar.jsx       → Navegación con scroll
+│   │   ├── Hero.jsx         → Sección principal
+│   │   ├── About.jsx        → Sobre mí con skills
+│   │   ├── Services.jsx     → Servicios ofrecidos
+│   │   ├── Portfolio.jsx    → Proyectos (conectado a API)
+│   │   ├── Contact.jsx      → Formulario de contacto
+│   │   ├── Footer.jsx       → Footer del sitio
+│   │   └── ChatWidget.jsx   → Chat flotante opcional
+│   ├── styles/
+│   │   └── index.css        → Todo el CSS minimalista
+│   ├── App.jsx              → Componente principal
+│   └── main.jsx             → Entry point
+├── index.html               → HTML base
+├── vite.config.js           → Configuración de Vite
+├── package.json             → Dependencias
+└── .env.example             → Ejemplo de variables
+
+══════════════════════════════════════════════════════════════
+
+🚀 INSTALACIÓN PASO A PASO:
+
+PASO 1: Instalar dependencias
+─────────────────────────────
+cd frontend
+npm install
+
+PASO 2: Configurar variables de entorno
+────────────────────────────────────────
+Copia .env.example a .env:
+
+cp .env.example .env
+
+Edita .env y configura la URL de tu backend:
+
+VITE_API_URL=http://localhost:3000/api
+
+PASO 3: Iniciar el proyecto
+───────────────────────────
+npm run dev
+
+El sitio estará disponible en: http://localhost:5173
+
+══════════════════════════════════════════════════════════════
+
+🎨 CARACTERÍSTICAS DEL DISEÑO:
+
+✓ Color principal UNEG: #00326f
+✓ Fondo: #eef1f5 (gris claro minimalista)
+✓ Totalmente responsive (móvil, tablet, desktop)
+✓ Animaciones suaves con CSS
+✓ Navegación sticky con scroll effect
+✓ Barras de progreso animadas en skills
+✓ Filtros interactivos en portfolio
+✓ Formulario de contacto validado
+✓ Chat widget opcional
+
