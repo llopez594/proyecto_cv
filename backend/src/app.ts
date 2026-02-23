@@ -1,5 +1,5 @@
-import express from "express";
-import cors from "cors";
+import express, { Request, Response } from "express";
+import cors, { CorsOptions } from "cors";
 import routes from "./routes";
 import { sequelize } from "./models/sequelize";
 import "./models";
@@ -17,8 +17,8 @@ const parseCorsOrigins = (value?: string): string[] => {
 };
 
 const allowedOrigins = parseCorsOrigins(process.env.CORS_ORIGIN);
-const corsOptions: cors.CorsOptions = {
-    origin: (origin, callback) => {
+const corsOptions: CorsOptions = {
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
         if (!origin) return callback(null, true); // Permitir requests sin origin (Postman, curl, health checks) 
         const isLocalhost = // Permitir localhost en dev  
             origin.startsWith("http://localhost:") ||
@@ -40,7 +40,7 @@ app.use(express.json());
 app.use("/api", routes);
 
 // Health check
-app.get("/", (_req, res) => {
+app.get("/", (_req: Request, res: Response) => {
     res.send("API Portfolio running");
 });
 
